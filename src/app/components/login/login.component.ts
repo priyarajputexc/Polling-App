@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
     this.apiInProgress = true;
     try {
       const data = await this.loginService.login(formData);
-      console.log(data);
       if( data["error"]){
         this.errorMessage = data["data"];
       }
