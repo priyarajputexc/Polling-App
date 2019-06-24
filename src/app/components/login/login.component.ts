@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit(formData) {
-    console.log(formData);
     this.apiInProgress = true;
     try {
       const data = await this.loginService.login(formData);
