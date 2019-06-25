@@ -1,0 +1,27 @@
+<div class="poll">
+  <form [formGroup]="pollForm" (ngSubmit)="onAddPoll(pollForm.value)">
+    <div class="form-group">
+      <label for="poll">New Poll</label>
+      <input type="text" class="form-control" placeholder="Poll" formControlName="poll" id="poll">
+    </div>
+    <div class="form-group">
+      <div class="opt">
+        <label id="option1">Option:1</label>
+        <input type="text" class="form-control option" placeholder="Option1" formControlName="option1" id="option1">
+      </div>
+      <div class="opt">
+        <label id="option2">Option:2</label>
+        <input type="text" class="form-control option" placeholder="Option2" formControlName="option2" id="option2">
+      </div>
+      <div class="opt">
+        <label id="option3">Option:3</label>
+        <input type="text" class="form-control option" placeholder="Option3" formControlName="option3" id="option3">
+      </div>
+      <div class="opt">
+        <label id="option4">Option:4</label>
+        <input type="text" class="form-control option" placeholder="Option4" formControlName="option4" id="option4">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Poll</button>
+  </form>
+</div>
