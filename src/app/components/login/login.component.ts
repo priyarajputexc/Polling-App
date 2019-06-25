@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from './login.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +9,12 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
   apiInProgress: boolean;
-  errorMessage: string;
+  errorMessage: string= "";
+  loginForm: FormGroup;
 
   constructor(
+    private commonService: CommonService,
     private formBuilder: FormBuilder,
     private loginService: LoginService
   ) { }
@@ -25,13 +27,11 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([
         Validators.required,
-        Validators.pattern("^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$")])
+        Validators.pattern("^[a-zA-Z0-9.!#$%&’*+/\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$")])
       ],
       password: ['', Validators.compose([
         Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(8),
-        Validators.pattern("^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$")
+        Validators.pattern(`^(?=^.{4,8}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&;*()_+}{"":'?\/<.>,])(?!.*\\s).*$`)
       ])]
     });
   }
@@ -45,16 +45,8 @@ export class LoginComponent implements OnInit {
 
   async onSubmit(formData) {
     this.apiInProgress = true;
-    try {
-      const data = await this.loginService.login(formData);
-      if( data["error"]){
-        this.errorMessage = data["data"];
-      }
-      this.apiInProgress = false;
-    } catch (error) {
-      console.error(error);
-      this.apiInProgress = false;
-    }
+    this.errorMessage = await this.commonService.login(formData);
+    this.apiInProgress = false;
   }
 
 }

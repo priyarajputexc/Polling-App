@@ -10,6 +10,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(body) {
-    return this.http.get(`${environment.apiBase}/login?email=${body.email}&password=${body.password}`).toPromise();
+    return this.http.get(`${environment.apiBase}/login?username=${body.email}&password=${body.password}`).toPromise();
   }
+  
 }
