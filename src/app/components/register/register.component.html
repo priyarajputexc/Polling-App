@@ -1,0 +1,42 @@
+<div class="register-css">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm.value)">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" placeholder="Enter email" id="email" formControlName="email"
+        [class.is-invalid]="email.invalid && email.touched">
+      <div *ngIf="email.invalid && email.touched">
+        <small *ngIf="email.errors?.required" class="text-danger">Email is required</small>
+        <small *ngIf="email.errors?.pattern" class="text-danger">Email is invalid</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password"
+        [class.is-invalid]="password.invalid && password.touched">
+      <div *ngIf="password.invalid && password.touched">
+        <small *ngIf="password.errors?.required" class="text-danger">Password is required</small>
+        <small *ngIf="password.errors?.pattern" class="text-danger">Password must be between 4 to 8 characters and msut
+          contain at least 1 uppercase Alphabet,1 lowercase alphabet, 1 character and 1 numeric value</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input [class.is-invalid]="registerForm.errors?.mismatch" type="password" class="form-control"
+        id="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword">
+      <small *ngIf="registerForm.errors?.mismatch" class="text-danger">Password and Confirm Password do not
+        match</small>
+    </div>
+    <div class="form-group">
+      <label for="user">User Type</label>
+      <select formControlName="user" class="form-control" id="user">
+        <option value="" selected>Select User Type</option>
+        <option value="admin">Admin</option>
+        <option value="guest">Guest</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary"
+      [disabled]="registerForm.invalid || apiInProgress">{{apiInProgress ? "Registering" : "Register"}}</button>
+    <br>
+    <div *ngIf="errorMessage!=''" class="error text-danger">User already exists</div>
+  </form>
+</div>
