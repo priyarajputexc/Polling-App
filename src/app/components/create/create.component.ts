@@ -13,7 +13,8 @@ export class CreateComponent implements OnInit {
 
   constructor(
     private createService: CreateService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+
   ) { }
 
   ngOnInit() {
@@ -33,7 +34,8 @@ export class CreateComponent implements OnInit {
   async onAddPoll(formData) {
     this.apiInProgress = true;
     try {
-      const data = await this.createService.addPoll(formData);
+      await this.createService.addPoll(formData);
+      this.pollForm.reset();
       this.apiInProgress = false;
     } catch (error) {
       console.error(error);

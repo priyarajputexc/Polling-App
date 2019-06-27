@@ -1,16 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './components/register/register.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
 import { CreateComponent } from './components/create/create.component';
-import { AuthComponent } from './components/auth/auth.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NgModule } from '@angular/core';
 import { HeaderComponent } from './components/header/header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RegisterComponent } from './components/register/register.component';
+import { ViewPollComponent } from './components/view-poll/view-poll.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +18,15 @@ import { HeaderComponent } from './components/header/header.component';
     RegisterComponent,
     DashboardComponent,
     CreateComponent,
-    AuthComponent,
-    HeaderComponent
+    HeaderComponent,
+    ViewPollComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
