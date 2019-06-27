@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from '../components/login/login.service';
 
 @Injectable({
@@ -8,7 +9,9 @@ export class CommonService {
   errorMessage: string = "";
 
 
-  constructor(private loginService: LoginService) { }
+  constructor(
+    private loginService: LoginService,
+    private router: Router) { }
 
   async login(formData){
     try {
@@ -17,6 +20,7 @@ export class CommonService {
         this.errorMessage = data["data"];
       } else {
         localStorage.setItem("access_token", data["token"]);
+        this.router.navigateByUrl("/dashboard");
       }
     } catch (error) {
       console.error(error);

@@ -1,0 +1,19 @@
+.poll {
+  background-color: rgb(255, 255, 255, 0.5);
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-top: 100px;
+  width: 30%;
+  min-width: 350px;
+  padding: 30px;
+}
+
+.option {
+  width: 100px;
+  margin-left: 10px;
+}
+
+.opt {
+  display: flex;
+  margin-bottom: 10px;
+}
