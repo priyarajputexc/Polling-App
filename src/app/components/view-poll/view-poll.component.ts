@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewPollService } from './view-poll.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ViewPollService } from './view-poll.service';
 
 @Component({
   selector: 'app-view-poll',
@@ -12,7 +12,7 @@ export class ViewPollComponent implements OnInit {
   newOptionForm: FormGroup;
   pollId: number;
   pollList: any;
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private viewPollService: ViewPollService

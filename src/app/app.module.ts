@@ -14,19 +14,19 @@ import { ViewPollComponent } from './components/view-poll/view-poll.component';
 @NgModule({
   declarations: [
     AppComponent,
+    CreateComponent,
+    DashboardComponent,
+    HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent,
-    CreateComponent,
-    HeaderComponent,
     ViewPollComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    FormsModule,
+    BrowserModule,
     HttpClientModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

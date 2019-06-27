@@ -31,10 +31,12 @@
 input {
   margin-right: 10px;
 }
-.progress{
+
+.progress {
   background-color: #343A40;
-  margin:10px;
+  margin: 10px;
 }
-.progress-bar{
+
+.progress-bar {
   text-align: center;
 }
