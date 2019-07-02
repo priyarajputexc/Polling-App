@@ -9,7 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class CreateComponent implements OnInit {
   apiInProgress: boolean;
+  loader: boolean;
   pollForm: FormGroup;
+  success: number;
 
   constructor(
     private createService: CreateService,
@@ -31,10 +33,35 @@ export class CreateComponent implements OnInit {
     });
   }
 
+  get poll() {
+    return this.pollForm.get('poll');
+  }
+
+  get option1() {
+    return this.pollForm.get('option1');
+  }
+
+  get option2() {
+    return this.pollForm.get('option2');
+  }
+
+  get option3() {
+    return this.pollForm.get('option3');
+  }
+
+  get option4() {
+    return this.pollForm.get('option4');
+  }
+
   async onAddPoll(formData) {
-    this.apiInProgress = true;
     try {
-      await this.createService.addPoll(formData);
+      this.apiInProgress = true;
+      this.loader = true;
+      const a = await this.createService.addPoll(formData);
+      if (a["error"] === 0) {
+        this.success = 1;
+      }
+      this.loader = false;
       this.pollForm.reset();
       this.apiInProgress = false;
     } catch (error) {
@@ -42,5 +69,4 @@ export class CreateComponent implements OnInit {
       this.apiInProgress = false;
     }
   }
-
 }
