@@ -1,0 +1,31 @@
+<div *ngIf="pollList">
+  <div *ngFor="let poll of pollList; let i=index" class="poll-item">
+    <span *ngIf="pollId !== poll._id" class="poll">{{i+1}}) {{poll.title}}</span>
+    <input *ngIf="pollId === poll._id" [(ngModel)]="poll.title">
+    <button class="button btn btn-danger btn-sm" (click)="deletePoll(poll._id)">Delete Poll</button>
+    <button *ngIf="pollId === poll._id" class="button btn btn-info btn-sm" (click)="editPoll(poll._id, poll.title)"
+      [disabled]="!poll.title">Save Edited Poll</button>
+    <button *ngIf="pollId !== poll._id" class="button btn btn-info btn-sm" (click)="setEditPollId(poll._id);">Edit
+      Poll</button>
+
+    <div *ngFor="let option of poll.options; let j=index" class="options">
+      <span class="optionItem">{{j+1}}. {{option.option}}</span>
+      <button class="button btn btn-danger btn-sm" (click)="deleteOption(option.option, poll)">Delete this
+        Option</button>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" class="progress-bar">{{option.vote}}votes</div>
+      </div>
+    </div>
+
+    <button *ngIf="!newOptionForm" class="btn btn-info btn-sm" (click)="inputForm()">Add
+      New Option</button>
+    <div class="newOption" *ngIf="newOptionForm">
+      <form [formGroup]="newOptionForm" (ngSubmit)="addOption(poll._id, newOptionForm.value)">
+        <input formControlName="newOpt">
+        <button type="submit" class="btn btn-info btn-sm">Save New
+          Option</button>
+      </form>
+    </div>
+
+  </div>
+</div>

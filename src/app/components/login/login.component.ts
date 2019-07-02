@@ -1,7 +1,7 @@
+import { CommonService } from 'src/app/services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from './login.service';
-import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private commonService: CommonService,
-    private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {

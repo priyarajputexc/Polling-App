@@ -1,11 +1,24 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <span class="navbar-brand mb-0 h1">The Polling App</span>
-  <button class="btn btn-primary" (click)="logout()">Logout</button>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard/create">Create Poll</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard/view">View Poll</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Take Poll</a>
+      </li>
+    </ul>
+    <button class="btn btn-primary" (click)="logout()">Logout</button>
+  </div>
 </nav>
 <div class="poll">
   <router-outlet></router-outlet>
 </div>
-
-
-
-

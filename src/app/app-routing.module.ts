@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateComponent } from './components/create/create.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { NgModule } from '@angular/core';
+import { RegisterComponent } from './components/register/register.component';
+import { Routes, RouterModule } from '@angular/router';
+import { ViewPollComponent } from './components/view-poll/view-poll.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: "create",
         component: CreateComponent
+      },
+      {
+        path: "view",
+        component: ViewPollComponent
       }
     ]
   }

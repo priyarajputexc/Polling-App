@@ -1,9 +1,9 @@
+import { CommonService } from 'src/app/services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { LoginService } from '../login/login.service';
 import { passwordValidator } from 'src/app/shared/password.validator';
 import { RegisterService } from './register.service';
-import { LoginService } from '../login/login.service';
-import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,6 @@ export class RegisterComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private formBuilder: FormBuilder,
-    private loginService: LoginService,
     private registerService: RegisterService
   ) { }
 
