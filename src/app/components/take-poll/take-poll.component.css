@@ -11,7 +11,7 @@
   margin: 12px 0px 0px 12px;
 }
 
-.option-item {
+.optionItem {
   font-size: 120%;
 }
 
@@ -19,24 +19,11 @@
   font-size: 150%;
 }
 
-.button {
-  float: right;
-  margin-left: 10px;
+.disabled {
+  cursor: not-allowed;
 }
 
-.new-option {
-  margin-top: 20px;
-}
-
-input {
-  margin-right: 10px;
-}
-
-.progress {
-  background-color: #343A40;
-  margin: 10px;
-}
-
-.progress-bar {
-  text-align: center;
+.disabled input {
+  pointer-events: none;
+  background-color: #D3D3D3;
 }

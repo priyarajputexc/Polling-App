@@ -1,7 +1,6 @@
 import { CommonService } from 'src/app/services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +9,9 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   apiInProgress: boolean;
-  errorMessage: string= "";
+  errorMessage: string = "";
   loginForm: FormGroup;
+  loader: boolean;
 
   constructor(
     private commonService: CommonService,
@@ -44,7 +44,9 @@ export class LoginComponent implements OnInit {
 
   async onSubmit(formData) {
     this.apiInProgress = true;
+    this.loader = true;
     this.errorMessage = await this.commonService.login(formData);
+    this.loader = false;
     this.apiInProgress = false;
   }
 

@@ -1,0 +1,19 @@
+<div *ngIf="loader" class="loader"></div>
+<div *ngIf="pollList">
+  <div *ngFor="let poll of pollList; let i=index" class="poll-item">
+    <form [formGroup]="takePollForm" (ngSubmit)="submitPoll(poll._id,takePollForm.value)">
+      <span class="poll">{{i+1}}) {{poll.title}}</span>
+      <div *ngFor="let option of poll.options; let j=index" class="options">
+        <span class="optionItem">{{j+1}}. {{option.option}}</span>
+        <span [class.disabled]="poll.voted">
+          <input type="radio" name="radio" formControlName="radio" [value]="option.option">
+        </span>
+      </div>
+      <button *ngIf="!poll.voted" class="btn btn-primary"
+        type="submit">{{apiInProgress ? "Submitting Your Opinion" : "Submit"}}
+        <span *ngIf="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      </button>
+      <div *ngIf="poll.voted" class="alert alert-success">Your Poll is submitted</div>
+    </form>
+  </div>
+</div>

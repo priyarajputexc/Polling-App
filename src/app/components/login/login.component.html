@@ -22,7 +22,9 @@
       </div>
     </div>
     <button type="submit" class="btn btn-primary"
-      [disabled]="loginForm.invalid || apiInProgress">{{apiInProgress ? "Logging In" : "Log In"}}</button>
+      [disabled]="loginForm.invalid || apiInProgress">{{apiInProgress ? "Logging In" : "Log In"}}
+      <span *ngIf="loader===true" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    </button>
     <br>
     <div *ngIf="errorMessage!=''" class="error text-danger">User doesn't exist</div>
   </form>

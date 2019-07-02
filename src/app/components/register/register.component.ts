@@ -1,7 +1,6 @@
 import { CommonService } from 'src/app/services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { LoginService } from '../login/login.service';
 import { passwordValidator } from 'src/app/shared/password.validator';
 import { RegisterService } from './register.service';
 
@@ -13,6 +12,7 @@ import { RegisterService } from './register.service';
 export class RegisterComponent implements OnInit {
   apiInProgress: boolean;
   errorMessage: string = "";
+  loader: boolean;
   registerForm: FormGroup;
 
   constructor(
@@ -58,7 +58,9 @@ export class RegisterComponent implements OnInit {
   async onRegister(formData) {
     this.apiInProgress = true;
     try {
+      this.loader = true;
       const data = await this.registerService.register(formData);
+      this.loader = false;
       if (data["error"]) {
         this.errorMessage = data["message"];
       } else {
@@ -71,5 +73,5 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  
+
 }

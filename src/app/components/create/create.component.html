@@ -2,26 +2,50 @@
   <form [formGroup]="pollForm" (ngSubmit)="onAddPoll(pollForm.value)">
     <div class="form-group">
       <label for="poll">New Poll</label>
-      <input type="text" class="form-control" placeholder="Poll" formControlName="poll" id="poll">
+      <input type="text" class="form-control" placeholder="Poll" formControlName="poll" id="poll"
+        [class.is-invalid]="poll.invalid && poll.touched">
+      <div *ngIf="poll.invalid && poll.touched">
+        <small *ngIf="poll.errors?.required" class="text-danger">Empty</small>
+      </div>
     </div>
     <div class="form-group">
       <div class="opt">
         <label id="option1">Option:1</label>
-        <input type="text" class="form-control option" placeholder="Option1" formControlName="option1" id="option1">
+        <input type="text" class="form-control option" placeholder="Option1" formControlName="option1" id="option1"
+          [class.is-invalid]="option1.invalid && option1.touched">
+        <div *ngIf="option1.invalid && option1.touched">
+          <small *ngIf="option1.errors?.required" class="text-danger">Empty</small>
+        </div>
       </div>
       <div class="opt">
         <label id="option2">Option:2</label>
-        <input type="text" class="form-control option" placeholder="Option2" formControlName="option2" id="option2">
+        <input type="text" class="form-control option" placeholder="Option2" formControlName="option2" id="option2"
+          [class.is-invalid]="option2.invalid && option2.touched">
+        <div *ngIf="option2.invalid && option2.touched">
+          <small *ngIf="option2.errors?.required" class="text-danger">Empty</small>
+        </div>
       </div>
       <div class="opt">
         <label id="option3">Option:3</label>
-        <input type="text" class="form-control option" placeholder="Option3" formControlName="option3" id="option3">
+        <input type="text" class="form-control option" placeholder="Option3" formControlName="option3" id="option3"
+          [class.is-invalid]="option3.invalid && option3.touched">
+        <div *ngIf="option3.invalid && option3.touched">
+          <small *ngIf="option3.errors?.required" class="text-danger">Empty</small>
+        </div>
       </div>
       <div class="opt">
         <label id="option4">Option:4</label>
-        <input type="text" class="form-control option" placeholder="Option4" formControlName="option4" id="option4">
+        <input type="text" class="form-control option" placeholder="Option4" formControlName="option4" id="option4"
+          [class.is-invalid]="option4.invalid && option4.touched">
+        <div *ngIf="option4.invalid && option4.touched">
+          <small *ngIf="option4.errors?.required" class="text-danger">Empty</small>
+        </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Add Poll</button>
+    <button type="submit" class="btn btn-primary"
+      [disabled]="pollForm.invalid || apiInProgress">{{apiInProgress ? "Adding Poll" : "Add Poll"}}
+      <span *ngIf="loader===true" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    </button>
+    <div *ngIf="success===1" class="alert alert-success">Poll Added Successfully</div>
   </form>
 </div>

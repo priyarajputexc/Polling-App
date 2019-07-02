@@ -26,7 +26,7 @@ export class ViewPollService {
   }
 
   addOption(id, body) {
-    return this.http.get(`${environment.apiBase}/add_new_option?id=${id}&option_text=${body.newOpt}`).toPromise();
+    return this.http.get(`${environment.apiBase}/add_new_option?id=${id}&option_text=${body.newOption}`).toPromise();
   }
 
 }

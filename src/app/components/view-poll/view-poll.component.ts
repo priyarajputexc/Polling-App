@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ViewPollService } from './view-poll.service';
 
 @Component({
@@ -9,9 +9,11 @@ import { ViewPollService } from './view-poll.service';
 })
 export class ViewPollComponent implements OnInit {
   apiInProgress: boolean;
+  loader: boolean;
   newOptionForm: FormGroup;
-  pollId: number;
+  pollId: string;
   pollList: any;
+  pollOptionId: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,14 +26,20 @@ export class ViewPollComponent implements OnInit {
 
   inputForm() {
     this.newOptionForm = this.formBuilder.group({
-      newOpt: ['']
+      newOption: ['', Validators.required]
     });
   }
 
   async viewPoll() {
-    const data = await this.viewPollService.viewPoll();
-    if (!data['error']) {
-      this.pollList = data['data'];
+    try {
+      this.loader = true;
+      const data = await this.viewPollService.viewPoll();
+      this.loader = false;
+      if (!data['error']) {
+        this.pollList = data['data'];
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -39,12 +47,12 @@ export class ViewPollComponent implements OnInit {
     this.apiInProgress = true;
     try {
       const data = await this.viewPollService.deletePoll(id);
+      this.apiInProgress = false;
       if (!data["error"]) {
         this.pollList.splice(id, 1);
       } else {
         console.error("Something went wrong: poll not found");
       }
-      this.apiInProgress = false;
     } catch (error) {
       console.error(error);
       this.apiInProgress = false;
@@ -52,17 +60,26 @@ export class ViewPollComponent implements OnInit {
   }
 
   deleteOption(optionToDelete, pollToDelete) {
-    this.pollList.forEach(pollItem => {
+    this.apiInProgress = true;
+    this.pollList.forEach(async pollItem => {
       if (pollItem._id === pollToDelete._id) {
-        this.viewPollService.deleteOption(pollItem._id, optionToDelete);
+        await this.viewPollService.deleteOption(pollItem._id, optionToDelete);
+        this.apiInProgress = false;
         pollItem.options = pollItem.options.filter(option => option.option !== optionToDelete);
       }
     })
   }
 
 
-  editPoll(id, newTitle) {
-    this.viewPollService.editPoll(id, newTitle);
+  async editPoll(id, newTitle) {
+    this.apiInProgress = true;
+    try {
+      await this.viewPollService.editPoll(id, newTitle);
+      this.pollId="";
+    } catch (error) {
+      console.error(error);
+    }
+    this.apiInProgress = false;
   }
 
   setEditPollId(id) {
@@ -70,13 +87,19 @@ export class ViewPollComponent implements OnInit {
   }
 
   addOption(id, newOption) {
+    this.apiInProgress = true;
     this.pollList.forEach(async pollItem => {
       if (pollItem._id === id) {
         await this.viewPollService.addOption(id, newOption);
         this.newOptionForm = null;
       }
+      this.apiInProgress = false;
       this.viewPoll();
     });
+  }
+
+  setPollId(id) {
+    this.pollOptionId = id;
   }
 
 }
